@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+
+
+</head>
+
+<body>
+    <p>How many buttons to create?</p>
+    <input type="text" Id="userinput">
+    <input type="button" Id="buttonId" value="Go!" onclick=the_number_of_button()>
+    <br>
+
+    <script>
+        let arrayButtons = [];
+
+        function Button(left, top, color) {
+            this.left = left;
+            this.top = top;
+            this.color = color;
+
+            this.btn = document.createElement("button"); // <button>
+            // this.btn.style.fontSize = "16px";
+            this.btn.style.width = "10em";
+            this.btn.style.height = "5em";
+            this.btn.style.background = this.color;
+            this.moveButton = function () {
+
+                this.left = Math.floor(Math.random() * (window.innerWidth - 160));
+                this.top = Math.floor(Math.random() * (window.innerHeight - 80));
+                console.log(this.top)
+                this.btn.style.position = "absolute";
+                this.btn.style.left = this.left + "px";
+                this.btn.style.top = this.top + "px";
+            }
+            document.body.appendChild(this.btn);
+        }
+
+
+        function colorGen() {
+            let arr = [];
+
+            for (let i = 0; i < 3; i++) {
+                let color = Math.floor(Math.random() * 256);
+                arr.push(color);
+            }
+            let newRgb = 'rgb(' + arr[0] + "," + arr[1] + "," + arr[2] + ' )';
+            return newRgb;
+        }
+
+
+        function the_number_of_button() {
+            let number = document.getElementById("userinput").value;
+            console.log(number)
+
+            if (5 <= parseInt(number) && parseInt(number) <= 100) {
+
+                for (let i = 0; i < parseInt(number); i++) {
+                    let btn = new Button(100, 200, colorGen());
+                    arrayButtons.push(btn);
+                    setInterval(function () { btn.moveButton() }, 2000)
+                }
+            }
+        }
+    
+
+
+
+    </script>
+</body>
